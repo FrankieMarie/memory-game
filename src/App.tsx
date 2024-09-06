@@ -27,17 +27,16 @@ function App() {
     if (hits === 5) {
       const total = hits + misses;
       const percent = Math.round(100 - (100 * misses) / total);
-      console.log('percent', percent);
       setGameOver(true);
       setMisses(`${misses}`);
       setAccuracy(percent);
     }
-  }, [playerSquares]);
+  }, [gameSquares, playerSquares]);
 
   const getNum = () => Math.floor(Math.random() * 24);
 
   const play = () => {
-    let result: number[] = [];
+    const result: number[] = [];
     for (let i = 0; i < 5; i++) {
       let num = getNum();
       while (result.includes(num)) {
@@ -82,10 +81,10 @@ function App() {
   };
 
   return (
-    <main className="bg-everforest-bg0 h-full">
+    <main className="h-full bg-everforest-bg0">
       <div className="max-w-7xl p-8 text-center">
         <header className="mb-8">
-          <h1 className="text-everforest-tan font-mono text-4xl">
+          <h1 className="font-mono text-4xl text-everforest-tan">
             <span className="italic">Memory</span>
             <span className="font-bold uppercase">Game</span>
           </h1>
@@ -119,7 +118,7 @@ function App() {
             />
           ))}
           {accuracy && (
-            <div className="bg-everforest-bg0 absolute flex h-full w-full flex-col justify-center bg-opacity-50 text-9xl font-bold text-white">
+            <div className="absolute flex h-full w-full flex-col justify-center bg-everforest-bg0 bg-opacity-50 text-9xl font-bold text-white">
               {gameOverMessage(accuracy)}
             </div>
           )}
